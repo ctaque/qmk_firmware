@@ -1,12 +1,21 @@
 #include QMK_KEYBOARD_H
 
+#define _BASEL 0
+#define _ALTERL 1
+
 enum custom_keycodes { EMACS = SAFE_RANGE, CHROME, SPOTIFY, NAUTILUS, FIREFOX, VSCODE, DBEAVER, HIBERNATE, LOCK, ANNON_FUNC };
 
-const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {LAYOUT_ortho_4x4(HIBERNATE, LOCK, KC_VOLU, KC_VOLD
-                                                                               , FIREFOX, VSCODE, ANNON_FUNC, KC_SLSH
-                                                                               , CHROME, SPOTIFY, NAUTILUS, DBEAVER
-                                                                               , EMACS, KC_HOME, KC_END, KC_ENT
-                                                                               )};
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+    [_BASEL] = LAYOUT_ortho_4x4(HIBERNATE, LOCK, KC_VOLU, KC_VOLD
+                              , FIREFOX, VSCODE, ANNON_FUNC, KC_SLSH
+                              , CHROME, SPOTIFY, NAUTILUS, DBEAVER
+                              , EMACS, KC_HOME, KC_END, MO(_ALTERL))
+    , [_ALTERL] = LAYOUT_ortho_4x4(KC_NO, KC_NO, KC_NO, KC_NO
+                                 , KC_NO, KC_NO, KC_NO, KC_NO
+                                 , KC_NO, KC_NO, KC_NO, KC_NO
+                                 , KC_NO, KC_NO, KC_NO, KC_NO
+                                 )
+};
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
